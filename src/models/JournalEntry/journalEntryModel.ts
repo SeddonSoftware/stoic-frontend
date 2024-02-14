@@ -5,3 +5,5 @@ class JournalEntryModel{
     Answer4!: string;
     notes!: string;
 }
+
+export default JournalEntryModel;
