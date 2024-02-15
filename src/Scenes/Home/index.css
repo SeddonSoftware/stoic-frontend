@@ -1,3 +1,5 @@
 .card{
-    min-height: 350px;
+    height: 400px;
+    padding: 100px;
+    margin-top: 15px;
 }
