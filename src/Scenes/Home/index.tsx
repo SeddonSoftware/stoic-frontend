@@ -1,4 +1,4 @@
-import { Card, Row, Col, Result, Button } from 'antd';
+import { Card, Row, Col, Spin } from 'antd';
 import {useAuth} from '../../contexts/AuthContext'
 import { useState, useEffect } from 'react';
 import quoteService from '../../services/QuoteService';
@@ -23,20 +23,18 @@ function HomePage() {
                 setAuthor(result.data.author)
             } catch (err) {
                 console.error('no quote', err);
-                
+                setQuote("Confine yourself to the present.")
+                setAuthor("Marcus Aurelius")
             }
         };
         const fetchTodaysJournalEntry = async () => {
             try {
-                //setLoading(true);
                 let result = await journalEntryService.getTodays();
                 setIsEntrySubmittedToday(true)
                 console.log(result)
-                // setLoading(false);
             } catch (err) {
                 console.error('Failed to fetch today\'s journal entry:', err);
                 setIsEntrySubmittedToday(false)
-                // setLoading(false);
             }
         };
         setIsLoading(true);
@@ -52,10 +50,16 @@ function HomePage() {
             <DailyStatusCard isLoggedIn={isLoggedIn} isEntrySubmittedToday={isEntrySubmittedToday} />
         </Col>
         <Col span={12}>
+            {isLoading 
+            ? 
+            <Spin/> 
+            :
             <Card className='card'>
                 <div style={{display:"flex"}}><h3>{quote}</h3></div>
                 <div style={{display:"flex", justifyContent:"end"}}><h3>-{author}</h3></div>
             </Card> 
+            }
+            
         </Col>
         </Row>
         <Row gutter={16}>

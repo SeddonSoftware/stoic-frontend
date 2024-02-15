@@ -16,7 +16,7 @@ function DailyStatusCard({isLoggedIn,isEntrySubmittedToday}:DailyStatusCardProps
         navigate('/login')
     }
     return ( 
-        <Card className='card'>
+        <Card>
             {isLoggedIn && isEntrySubmittedToday && (
                 <Result
                 icon={<SmileOutlined />}
