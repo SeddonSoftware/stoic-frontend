@@ -13,6 +13,18 @@ const http = axios.create({
     },
   });
 
+  http.interceptors.request.use(function (config) {
+    const token = localStorage.getItem('token');
+    // Initialize headers object if it doesn't exist
+    config.headers = config.headers || {};
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+
 
   http.interceptors.response.use(
     response => {

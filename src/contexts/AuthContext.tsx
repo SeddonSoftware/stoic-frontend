@@ -33,6 +33,7 @@ export function AuthProvider(props: any){
           const result = await AuthService.login(authInput);
           setIsLoggedIn(true);
           setToken(result.accessToken);
+          localStorage.setItem('token',result.accessToken)
           return true;
         } catch (error) {
           console.error('Login failed:', error);
