@@ -1,25 +1,23 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Form, Input } from 'antd';
+import { Card, Button, Form, Input, Alert } from 'antd';
 import JournalEntryModel from '../../models/JournalEntry/journalEntryModel';
 import journalEntryService from '../../services/JournalEntryService';
 
 
 function JournalEntryPage() {
     const [journalEntry, setJournalEntry] = useState<JournalEntryModel>();
-    // const [loading, setLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState<string|null>(null);
+    const [successMessage, setSuccessMessage] = useState<string|null>(null);
     const [form] = Form.useForm();
 
     useEffect(() => {
         const fetchTodaysJournalEntry = async () => {
             try {
-                //setLoading(true);
                 let result = await journalEntryService.getTodays();
                 setJournalEntry(result.data);
                 form.setFieldsValue(result.data);
-                // setLoading(false);
             } catch (err) {
                 console.error('Failed to fetch today\'s journal entry:', err);
-                // setLoading(false);
             }
         };
 
@@ -29,9 +27,22 @@ function JournalEntryPage() {
     const onFinish = async (values: any) => {
         let result;
         if(journalEntry){
-            result = await journalEntryService.update(values, journalEntry.id);
+            try{
+                result = await journalEntryService.update(values, journalEntry.id);
+                setSuccessMessage("Update Success")
+            }catch(e){
+                console.log(e)
+                setErrorMessage("Failed to Update");
+            }
+            
         }else{
-            result = await journalEntryService.create(values);
+            try{
+                result = await journalEntryService.create(values);
+                setSuccessMessage("Save Success")
+            }catch(e){
+                setErrorMessage("Failed to Save");
+            }
+            
         }
         console.log(result);
 
@@ -95,9 +106,16 @@ function JournalEntryPage() {
                         <Input.TextArea />
                     </Form.Item>
                     <Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Button type="primary" htmlType="submit" style={{marginBottom: 5}}>
                         {journalEntry ? 'Update' : "Submit"}
                     </Button>
+                    {successMessage && (
+                        <Alert message={successMessage} type="success" />
+                    )}
+                    {errorMessage && (
+                        <Alert message={errorMessage} type="error" />
+                    )}
+                    
                     </Form.Item>
                 </Form>
         </Card>
