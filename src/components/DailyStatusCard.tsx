@@ -16,9 +16,10 @@ function DailyStatusCard({isLoggedIn,isEntrySubmittedToday}:DailyStatusCardProps
         navigate('/login')
     }
     return ( 
-        <Card>
+        <Card type='inner' style={{ height: 400,padding: 100,marginTop: 15}}>
             {isLoggedIn && isEntrySubmittedToday && (
                 <Result
+                style={{padding: '0px !important'}}
                 icon={<SmileOutlined />}
                 title="Great job at journaling, keep it up!"
                 extra={<Button onClick={handleCLickJournal} type="primary">Update</Button>}
@@ -26,13 +27,15 @@ function DailyStatusCard({isLoggedIn,isEntrySubmittedToday}:DailyStatusCardProps
             )}
             {isLoggedIn && !isEntrySubmittedToday && (
                 <Result
+                style={{padding: '0px !important'}}
                 icon={<MehOutlined />}
                 title="You haven't journaled yet today. Keep up the dicipline!"
                 extra={<Button onClick={handleCLickJournal} type="primary">Enter</Button>}
-            />
+                />
             )}
             {!isLoggedIn && (
                 <Result
+                style={{padding: '0px !important'}}
                 icon={<UserOutlined />}
                 title="Login so you can keep up the Journaling. You got this!"
                 extra={<Button onClick={handleCLickLogin} type="primary">Login</Button>}
