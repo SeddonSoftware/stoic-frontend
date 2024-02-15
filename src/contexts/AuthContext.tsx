@@ -31,11 +31,12 @@ export function AuthProvider(props: any){
     const login = async (authInput: LoginModel) => {
         try {
           const result = await AuthService.login(authInput);
-          setIsLoggedIn(true)
-          setToken(result.accessToken)
-          console.log("LOGIN RESULT: ", result)
+          setIsLoggedIn(true);
+          setToken(result.accessToken);
+          return true;
         } catch (error) {
-          console.error('Login failed:', error)
+          console.error('Login failed:', error);
+          return false;
         }
       };
 

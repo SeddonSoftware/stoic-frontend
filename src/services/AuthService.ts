@@ -5,7 +5,6 @@ import http from './httpService';
 class AuthService{
     public async login(authInput: LoginModel):Promise<LoginResultModel>{
         let result = await http.post('login', authInput)
-        console.log(result);
         return result.data;
     }
 }
