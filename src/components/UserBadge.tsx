@@ -11,7 +11,7 @@ const items: MenuProps['items'] = [
     {
       key: '1',
       label: (
-        <a target="_blank" href="/login">
+        <a href="/login">
           Login
         </a>
       ),
