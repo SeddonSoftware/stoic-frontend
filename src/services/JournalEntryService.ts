@@ -14,16 +14,19 @@ class JournalEntryService{
         let result = await http.get('JournalEntries/today')
         return result;
     }
-    public async get(){
-
+    public async get(id: number){
+        let result = await http.get(`JournalEntries/${id}`)
+        return result
     }
 
     public async getAll() {
-
+        let result = await http.get('JournalEntries/getAll')
+        return result;
     }
 
-    public async delete(){
-
+    public async delete(id: number){
+        let result = await http.delete(`JournalEntries/${id}`)
+        return result
     }
 }
 
