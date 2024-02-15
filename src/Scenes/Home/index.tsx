@@ -62,20 +62,6 @@ function HomePage() {
             
         </Col>
         </Row>
-        <Row gutter={16}>
-        <Col span={12}>
-            <Card className='card'>
-            <div style={{display:"flex"}}><h3>{quote}</h3></div>
-            <div style={{display:"flex", justifyContent:"end"}}><h3>-{author}</h3></div>
-            </Card> 
-        </Col>
-        <Col span={12}>
-        <Card className='card'>
-            <div style={{display:"flex"}}><h3>{quote}</h3></div>
-            <div style={{display:"flex", justifyContent:"end"}}><h3>-{author}</h3></div>
-            </Card> 
-        </Col>
-        </Row>
     </>
 
     );
