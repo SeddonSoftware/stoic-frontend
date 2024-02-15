@@ -1,25 +1,25 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Form, Input, Alert } from 'antd';
+import { Card, Button, Form, Input } from 'antd';
 import JournalEntryModel from '../../models/JournalEntry/journalEntryModel';
-import JournalEntryService from '../../services/JournalEntryService';
+import journalEntryService from '../../services/JournalEntryService';
 
 
 function JournalEntryPage() {
     const [journalEntry, setJournalEntry] = useState<JournalEntryModel>();
-    const [loading, setLoading] = useState(true);
+    // const [loading, setLoading] = useState(true);
     const [form] = Form.useForm();
 
     useEffect(() => {
         const fetchTodaysJournalEntry = async () => {
             try {
-                setLoading(true);
-                let result = await JournalEntryService.getTodays();
+                //setLoading(true);
+                let result = await journalEntryService.getTodays();
                 setJournalEntry(result.data);
                 form.setFieldsValue(result.data);
-                setLoading(false);
+                // setLoading(false);
             } catch (err) {
                 console.error('Failed to fetch today\'s journal entry:', err);
-                setLoading(false);
+                // setLoading(false);
             }
         };
 
@@ -27,7 +27,7 @@ function JournalEntryPage() {
     }, [form]);
 
     const onFinish = async (values: any) => {
-        let result:any = await JournalEntryService.create(values);
+        let result:any = await journalEntryService.create(values);
         console.log(result);
 
     };

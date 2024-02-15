@@ -3,11 +3,10 @@ import { Routes, Route, useNavigate  } from 'react-router-dom';
 import {
   HomeOutlined,
   EditOutlined,
-  QuestionOutlined,
-  UserOutlined
+  QuestionOutlined
 } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Layout, Menu, Avatar, Space  } from 'antd';
+import { Layout, Menu } from 'antd';
 import './App.css'
 import HomePage from './Scenes/Home';
 import JournalEntryPage from './Scenes/JournalEntry';
@@ -43,7 +42,7 @@ function getItem(
 const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
-  const {isLoggedIn, setIsLoggedIn, login} = useAuth();
+  const {isLoggedIn} = useAuth();
 
   const items: MenuItem[] = [
     getItem('Home', '1', <HomeOutlined />,() => navigate('/')),

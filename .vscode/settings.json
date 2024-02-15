@@ -1,0 +1,5 @@
+{
+    "appService.showBuildDuringDeployPrompt": false,
+    "appService.defaultWebAppToDeploy": "/subscriptions/56a4dc52-91cb-452a-9b5a-1ddaafa42f94/resourceGroups/seddonsoftware-resource-group/providers/Microsoft.Web/sites/stoicjournal",
+    "appService.deploySubpath": "build"
+}

@@ -7,4 +7,5 @@ class QuoteService{
     }
 }
 
-export default new QuoteService();
+const quoteService = new QuoteService();
+export default quoteService;

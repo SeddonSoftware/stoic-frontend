@@ -27,4 +27,6 @@ class JournalEntryService{
     }
 }
 
-export default new JournalEntryService();
+const journalEntryService = new JournalEntryService();
+
+export default journalEntryService;

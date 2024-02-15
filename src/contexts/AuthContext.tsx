@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react';
 import LoginModel from '../models/Login/loginModel';
-import AuthService from '../services/AuthService';
+import authService from '../services/AuthService';
 
 interface AuthContextType {
     token: string|null; 
@@ -30,7 +30,7 @@ export function AuthProvider(props: any){
 
     const login = async (authInput: LoginModel) => {
         try {
-          const result = await AuthService.login(authInput);
+          const result = await authService.login(authInput);
           setIsLoggedIn(true);
           setToken(result.accessToken);
           localStorage.setItem('token',result.accessToken)

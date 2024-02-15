@@ -1,19 +1,19 @@
 import { Card, Row, Col, Result, Button } from 'antd';
-import {useAuth} from '../../contexts/AuthContext'
+// import {useAuth} from '../../contexts/AuthContext'
 import { useState, useEffect } from 'react';
-import QuoteService from '../../services/QuoteService';
+import quoteService from '../../services/QuoteService';
 import { SmileOutlined } from '@ant-design/icons';
 import './index.css'
 
 function HomePage() {
-    const {isLoggedIn} = useAuth();
+    // const {isLoggedIn} = useAuth();
     const [quote, setQuote] = useState('');
     const [author, setAuthor] = useState('');
 
     useEffect(() => {
         const fetchQuote = async () => {
             try {
-                let result = await QuoteService.get();
+                let result = await quoteService.get();
                 console.log(result.data);
                 setQuote(result.data.quote)
                 setAuthor(result.data.author)
