@@ -1,5 +1,5 @@
 class LoginModel {
-    emailAddress!: string;
+    email!: string;
     password!: string;
 }
 

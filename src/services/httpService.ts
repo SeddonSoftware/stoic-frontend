@@ -30,7 +30,6 @@ const http = axios.create({
           content: error.response.data.error.message,
         });
       } else if (!error.response) {
-        // I'm actually not sure why the boilerplate would try to load a string from the locale off the server-side if we were to get a full-scale API error.
         Modal.error({ content: 'We had an unexpected error. Please try again or contact your administrator.' });
       }
   
