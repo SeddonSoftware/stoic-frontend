@@ -33,6 +33,7 @@ function JournalEntryPage() {
         }else{
             result = await journalEntryService.create(values);
         }
+        console.log(result);
 
     };
 
