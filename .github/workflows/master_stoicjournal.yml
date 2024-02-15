@@ -59,4 +59,4 @@ jobs:
           app-name: 'stoicjournal'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0D7F00F4434A48F0B9C6F3FCB92E14A4 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4415779EA4E746C1A345C4B4F738222A }}
