@@ -4,6 +4,7 @@ class JournalEntryModel{
     answer3!: string;
     answer4!: string;
     notes!: string;
+    id!: number;
 }
 
 export default JournalEntryModel;

@@ -6,8 +6,8 @@ class JournalEntryService{
         let result = await http.post('JournalEntries/create', input)
         return result.data
     }
-    public async update(input: JournalEntryModel){
-        let result = await http.put('JournalEntries/{id}',input)
+    public async update(input: JournalEntryModel, id: number){
+        let result = await http.put(`JournalEntries/${id}`,input)
         return result
     }
     public async getTodays(){

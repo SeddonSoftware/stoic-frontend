@@ -27,8 +27,12 @@ function JournalEntryPage() {
     }, [form]);
 
     const onFinish = async (values: any) => {
-        let result:any = await journalEntryService.create(values);
-        console.log(result);
+        let result;
+        if(journalEntry){
+            result = await journalEntryService.update(values, journalEntry.id);
+        }else{
+            result = await journalEntryService.create(values);
+        }
 
     };
 
@@ -44,7 +48,7 @@ function JournalEntryPage() {
                     layout="vertical"
                     labelCol={{ span: 16 }}
                     wrapperCol={{ span: 16 }}
-                    style={{ maxWidth: 600 }}
+                    style={{ maxWidth: 600, padding: 15 }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
@@ -89,9 +93,9 @@ function JournalEntryPage() {
                     >
                         <Input.TextArea />
                     </Form.Item>
-                    <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+                    <Form.Item>
                     <Button type="primary" htmlType="submit">
-                        Submit
+                        {journalEntry ? 'Update' : "Submit"}
                     </Button>
                     </Form.Item>
                 </Form>
