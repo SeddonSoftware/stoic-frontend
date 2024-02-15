@@ -1,21 +1,45 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, Button, Form, Input, Alert } from 'antd';
 import JournalEntryModel from '../../models/JournalEntry/journalEntryModel';
+import JournalEntryService from '../../services/JournalEntryService';
 
 
 function JournalEntryPage() {
+    const [journalEntry, setJournalEntry] = useState<JournalEntryModel>();
+    const [loading, setLoading] = useState(true);
+    const [form] = Form.useForm();
+
+    useEffect(() => {
+        const fetchTodaysJournalEntry = async () => {
+            try {
+                setLoading(true);
+                let result = await JournalEntryService.getTodays();
+                setJournalEntry(result.data);
+                form.setFieldsValue(result.data);
+                setLoading(false);
+            } catch (err) {
+                console.error('Failed to fetch today\'s journal entry:', err);
+                setLoading(false);
+            }
+        };
+
+        fetchTodaysJournalEntry();
+    }, [form]);
 
     const onFinish = async (values: any) => {
+        let result:any = await JournalEntryService.create(values);
+        console.log(result);
 
     };
 
     const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
     };
-    
+     
     return(
         <Card title={"Journal Entry"}>
                 <Form
+                    form={form}
                     name="journalEntry"
                     layout="vertical"
                     labelCol={{ span: 16 }}
@@ -24,30 +48,37 @@ function JournalEntryPage() {
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
+                    initialValues={{
+                        answer1: journalEntry?.answer1,
+                        answer2: journalEntry?.answer2,
+                        answer3: journalEntry?.answer3,
+                        answer4: journalEntry?.answer4,
+                        notes: journalEntry?.notes,
+                    }}
                 >
                     <Form.Item<JournalEntryModel>
                     label="What did I do well today?"
-                    name="Answer1"
+                    name="answer1"
                     >
-                        <Input.TextArea />
+                        <Input.TextArea/>
                     </Form.Item>
                     <Form.Item<JournalEntryModel>
                     label="What did I do poorly today?"
-                    name="Answer2"
+                    name="answer2"
                     >
                         <Input.TextArea />
                     </Form.Item>
 
                     <Form.Item<JournalEntryModel>
                     label="What did I learn today?"
-                    name="Answer3"
+                    name="answer3"
                     >
                         <Input.TextArea />
                     </Form.Item>
 
                     <Form.Item<JournalEntryModel>
                     label="What can I improve tomorrow?"
-                    name="Answer4"
+                    name="answer4"
                     >
                         <Input.TextArea />
                     </Form.Item>
