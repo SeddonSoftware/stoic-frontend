@@ -1,46 +1,111 @@
 import { useState, useEffect } from 'react';
-import { Card, Button, Form, Input, Alert } from 'antd';
+import { Card, Button, Form, Input, Alert, Modal } from 'antd';
 import JournalEntryModel from '../../models/JournalEntry/journalEntryModel';
 import journalEntryService from '../../services/JournalEntryService';
 
 
 function JournalEntryPage() {
-    const [journalEntry, setJournalEntry] = useState<JournalEntryModel>();
+    const [journalEntry, setJournalEntry] = useState<JournalEntryModel|null>();
     const [errorMessage, setErrorMessage] = useState<string|null>(null);
     const [successMessage, setSuccessMessage] = useState<string|null>(null);
+    const [entryId, setEntryId] = useState<number|null>(null);
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const [form] = Form.useForm();
 
     useEffect(() => {
-        const fetchTodaysJournalEntry = async () => {
-            try {
-                let result = await journalEntryService.getTodays();
-                setJournalEntry(result.data);
-                form.setFieldsValue(result.data);
-            } catch (err) {
-                console.error('Failed to fetch today\'s journal entry:', err);
-            }
-        };
-
-        fetchTodaysJournalEntry();
+        if(!journalEntry){
+            const fetchTodaysJournalEntry = async () => {
+                try {
+                    let result = await journalEntryService.getTodays();
+                    setJournalEntry(result.data);
+                    setEntryId(result.data.id);
+                    form.setFieldsValue(result.data);
+                } catch (err) {
+                    console.error('Failed to fetch today\'s journal entry:', err);
+                }
+            };
+    
+            fetchTodaysJournalEntry();
+        }
     }, [form]);
+
+    const showDeleteModal = () => {
+        setIsModalOpen(true);
+      };
+
+    const handleCancel = () => {
+        setIsModalOpen(false);
+    };
+
+    const deleteEntry = async () => {
+        try {
+            await journalEntryService.delete(entryId);
+            
+        } catch (err) {
+            setErrorMessage("Failed to delete")
+            messageTimeOut()
+        }
+        finally{
+            setIsModalOpen(false);
+            setJournalEntry(null)
+            setSuccessMessage("Entry Deleted")
+            messageTimeOut()
+            form.setFieldsValue({
+                answer1: '',
+                answer2: '',
+                answer3: '',
+                answer4: '',
+                notes: ''
+            });
+            setEntryId(null)
+        }
+      };
+
+    const messageTimeOut = async () => {
+        setTimeout(() => {
+            setSuccessMessage(null);
+            setErrorMessage(null)
+          }, 5000);
+    }
 
     const onFinish = async (values: any) => {
         let result;
         if(journalEntry){
             try{
+                console.log(values);
+                console.log(journalEntry)
                 result = await journalEntryService.update(values, journalEntry.id);
                 setSuccessMessage("Update Success")
+                messageTimeOut()
             }catch(e){
                 console.log(e)
                 setErrorMessage("Failed to Update");
+                messageTimeOut()
             }
             
         }else{
             try{
                 result = await journalEntryService.create(values);
                 setSuccessMessage("Save Success")
+                messageTimeOut()
             }catch(e){
                 setErrorMessage("Failed to Save");
+                messageTimeOut();
+            }
+            finally{
+                setJournalEntry(
+                    {
+                        answer1: result?.answer1,
+                        answer2: result?.answer2,
+                        answer3: result?.answer3,
+                        answer4: result?.answer4,
+                        notes: result?.notes,
+                        id: result?.id
+                    }
+                )
+                console.log(result)
+                setEntryId(result.id)
+
             }
             
         }
@@ -109,6 +174,11 @@ function JournalEntryPage() {
                     <Button type="primary" htmlType="submit" style={{marginBottom: 5}}>
                         {journalEntry ? 'Update' : "Submit"}
                     </Button>
+                    {journalEntry && (
+                    <Button type="default" onClick={showDeleteModal} style={{marginBottom: 5, marginLeft: 15}}>
+                        Delete
+                    </Button>
+                    )}
                     {successMessage && (
                         <Alert message={successMessage} type="success" />
                     )}
@@ -118,6 +188,9 @@ function JournalEntryPage() {
                     
                     </Form.Item>
                 </Form>
+                <Modal title="Delete Entry?" open={isModalOpen} onOk={deleteEntry} onCancel={handleCancel}>
+                    <p>Are you sure you want to delete your journal entry?</p>
+                </Modal>
         </Card>
     )
 };

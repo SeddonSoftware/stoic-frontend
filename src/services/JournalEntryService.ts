@@ -24,7 +24,7 @@ class JournalEntryService{
         return result;
     }
 
-    public async delete(id: number){
+    public async delete(id: number|null){
         let result = await http.delete(`JournalEntries/${id}`)
         return result
     }
