@@ -11,7 +11,7 @@ function HomePage() {
     const [quote, setQuote] = useState('');
     const [author, setAuthor] = useState('');
     const [isEntrySubmittedToday, setIsEntrySubmittedToday] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const fetchQuote = async () => {
@@ -50,16 +50,17 @@ function HomePage() {
             <DailyStatusCard isLoggedIn={isLoggedIn} isEntrySubmittedToday={isEntrySubmittedToday} />
         </Col>
         <Col span={12}>
+            <Card className='card'>
             {isLoading 
             ? 
             <Spin/> 
             :
-            <Card className='card'>
+                <>
                 <div style={{display:"flex"}}><h3>{quote}</h3></div>
                 <div style={{display:"flex", justifyContent:"end"}}><h3>-{author}</h3></div>
-            </Card> 
+                </>
             }
-            
+            </Card> 
         </Col>
         </Row>
     </>
