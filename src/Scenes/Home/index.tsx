@@ -57,10 +57,14 @@ function HomePage() {
             ? 
             <Spin/> 
             :
-                <>
-                <div style={{display:"flex"}}><h3>{quote}</h3></div>
-                <div style={{display:"flex", justifyContent:"end"}}><h3>-{author}</h3></div>
-                </>
+            <>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+                <h3>{quote}</h3>
+                <div style={{ display: "flex", justifyContent: "flex-end", width: "100%" }}>
+                <h3>-{author}</h3>
+                </div>
+            </div>
+            </>
             }
             </Card> 
         </Col>
