@@ -28,13 +28,15 @@ function HomePage() {
             }
         };
         const fetchTodaysJournalEntry = async () => {
-            try {
-                let result = await journalEntryService.getTodays();
-                setIsEntrySubmittedToday(true)
-                console.log(result)
-            } catch (err) {
-                console.error('Failed to fetch today\'s journal entry:', err);
-                setIsEntrySubmittedToday(false)
+            if(isLoggedIn){
+                try {
+                    let result = await journalEntryService.getTodays();
+                    setIsEntrySubmittedToday(true)
+                    console.log(result)
+                } catch (err) {
+                    console.error('Failed to fetch today\'s journal entry:', err);
+                    setIsEntrySubmittedToday(false)
+                }
             }
         };
         setIsLoading(true);
