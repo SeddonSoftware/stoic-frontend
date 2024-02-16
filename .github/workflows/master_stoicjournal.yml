@@ -58,5 +58,5 @@ jobs:
         with:
           app-name: 'stoicjournal'
           slot-name: 'Production'
-          package: .
+          package: release.zip
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_EC827B5239F84C7D99B39C664591A70E }}
