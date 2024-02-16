@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate  } from 'react-router-dom';
+import { Routes, Route, useNavigate, useLocation  } from 'react-router-dom';
 import {
   HomeOutlined,
   EditOutlined,
@@ -43,18 +43,23 @@ const App: React.FC = () => {
   const [collapsed, setCollapsed] = useState(false);
   const navigate = useNavigate();
   const {isLoggedIn} = useAuth();
+  const location = useLocation();
 
   const items: MenuItem[] = [
-    getItem('Home', '1', <HomeOutlined />,() => navigate('/')),
-    getItem('Journal', '2', <EditOutlined />,() => navigate('/journal'), !isLoggedIn),
-    getItem('About', '3', <QuestionOutlined />,() => navigate('/about')),
+    getItem('Home', '/', <HomeOutlined />,() => navigate('/')),
+    getItem('Journal', '/journal', <EditOutlined />,() => navigate('/journal'), !isLoggedIn),
+    getItem('About', '/about', <QuestionOutlined />,() => navigate('/about')),
   ];
+
+  let selectedKeys = [location.pathname === '/' ? '/' : location.pathname];
+
+  console.log(selectedKeys)
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider className='sider' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>
         <div className="demo-logo-vertical" />
-        <Menu className='menu' theme="dark" defaultSelectedKeys={['1']} mode="inline" items={items} />
+        <Menu className='menu' theme="dark" selectedKeys={selectedKeys} mode="inline" items={items} />
       </Sider>
       <Layout>
         <Header style={{backgroundColor: 'white', display: 'flex', justifyContent: 'end'}}> <UserBadge isLoggedIn={isLoggedIn}/> </Header>
