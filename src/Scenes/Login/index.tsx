@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Button, Form, Input, Alert } from 'antd';
+import { Card, Button, Form, Input, Alert, Spin } from 'antd';
 import {useAuth} from '../../contexts/AuthContext'
 import LoginModel from '../../models/Login/loginModel';
 import { useNavigate } from 'react-router-dom';
@@ -7,15 +7,18 @@ import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
     const [isLoggedFailed, setIsLoggedFailed] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const {login} = useAuth();
     const navigate = useNavigate();
 
     const onFinish = async (values: any) => {
+        setIsLoading(true)
         let result:any = await login(values)
         if(result===true){
             navigate('/');
         }else{
             setIsLoggedFailed(true)
+            setIsLoading(false);
         }
     };
 
@@ -56,6 +59,7 @@ function LoginPage() {
                 <Button type="primary" htmlType="submit">
                     Submit
                 </Button>
+                {isLoading ? <Spin style={{marginLeft: 10}}/> : <></>}
                 </Form.Item>
             </Form>
         </Card>
