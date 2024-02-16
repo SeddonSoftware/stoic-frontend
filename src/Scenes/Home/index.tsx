@@ -18,7 +18,6 @@ function HomePage() {
             
             try {
                 let result = await quoteService.get();
-                console.log(result.data);
                 setQuote(result.data.quote)
                 setAuthor(result.data.author)
             } catch (err) {
@@ -32,7 +31,6 @@ function HomePage() {
                 try {
                     let result = await journalEntryService.getTodays();
                     setIsEntrySubmittedToday(true)
-                    console.log(result)
                 } catch (err) {
                     console.error('Failed to fetch today\'s journal entry:', err);
                     setIsEntrySubmittedToday(false)

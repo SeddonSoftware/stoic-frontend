@@ -12,7 +12,6 @@ function LoginPage() {
 
     const onFinish = async (values: any) => {
         let result:any = await login(values)
-        console.log(result);
         if(result===true){
             navigate('/');
         }else{

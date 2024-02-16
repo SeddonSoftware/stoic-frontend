@@ -53,8 +53,6 @@ const App: React.FC = () => {
 
   let selectedKeys = [location.pathname === '/' ? '/' : location.pathname];
 
-  console.log(selectedKeys)
-
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <Sider className='sider' collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}>

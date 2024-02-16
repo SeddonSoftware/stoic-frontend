@@ -72,8 +72,6 @@ function JournalEntryPage() {
         let result;
         if(journalEntry){
             try{
-                console.log(values);
-                console.log(journalEntry)
                 result = await journalEntryService.update(values, journalEntry.id);
                 setSuccessMessage("Update Success")
                 messageTimeOut()
@@ -103,18 +101,13 @@ function JournalEntryPage() {
                         id: result?.id
                     }
                 )
-                console.log(result)
                 setEntryId(result.id)
-
             }
-            
         }
-        console.log(result);
-
     };
 
     const onFinishFailed = (errorInfo: any) => {
-    console.log('Failed:', errorInfo);
+        console.log('Failed:', errorInfo);
     };
      
     return(
