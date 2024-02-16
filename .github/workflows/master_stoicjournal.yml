@@ -28,11 +28,15 @@ jobs:
     - name: Zip artifact for deployment
       run: zip -r release.zip ./build
 
+    - name: List contents of the zip
+      run: unzip -l release.zip
+
+
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v3
       with:
         name: node-app
-        path: ./release.zip
+        path: release.zip
 
     - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
