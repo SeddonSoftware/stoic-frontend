@@ -117,7 +117,7 @@ function JournalEntryPage() {
                     name="journalEntry"
                     layout="vertical"
                     labelCol={{ span: 16 }}
-                    wrapperCol={{ span: 16 }}
+                    wrapperCol={{ span: 24 }}
                     style={{ maxWidth: 600, padding: 15 }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
