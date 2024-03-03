@@ -1,15 +1,56 @@
-.card{
+/* Base styles */
+.card, .calandar {
+    height: 500px;
+    width: 700px;
+    margin: 15px;
+}
+
+.card {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 500px;
-    width: 700px;
-    margin: 15px;
     max-width: 800px;
 }
 
-.calandar{
-    height: 500px;
-    width: 700px;
-    margin: 15px;
+/* Smaller screens (e.g., smartphones) */
+@media (max-width: 600px) {
+    .card, .calandar {
+        height: 300px;
+        width: 100%;
+    }
+}
+
+/* Medium screens (e.g., tablets) */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .card, .calandar {
+        height: 400px;
+        width: 60%;
+    }
+}
+
+/* Larger screens */
+@media (min-width: 1025px) and (max-width: 1366px) {
+    .card{
+        height: 250px;
+        width: 30%;
+        .ant-result-title{
+            font-size: 14px;
+        }
+        .ant-result-icon{
+            svg{
+                font-size: 50px;
+            }
+        }
+    }
+    .calandar{
+        width: 50%;
+    }
+}
+
+
+@media (min-width: 1367px)   {
+    .card, .calandar {
+        height: 500px;
+        width: 700px;
+    }
 }
