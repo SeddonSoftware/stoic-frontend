@@ -164,8 +164,7 @@ function HomePage() {
             </>
             }
             </Card> 
-            <Calandar data={data}/>
-            
+            <Calandar/>
     </Flex>
 
     );

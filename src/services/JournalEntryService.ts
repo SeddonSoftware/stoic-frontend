@@ -1,3 +1,4 @@
+import { GetAllJournalDTO } from "../models/JournalEntry/getAllJournalDto";
 import JournalEntryModel from "../models/JournalEntry/journalEntryModel";
 import http from './httpService';
 
@@ -19,8 +20,8 @@ class JournalEntryService{
         return result
     }
 
-    public async getAll() {
-        let result = await http.get('JournalEntries/getAll')
+    public async getAll(input: GetAllJournalDTO) {
+        let result = await http.get('JournalEntries/getAll',{params: input})
         return result;
     }
 

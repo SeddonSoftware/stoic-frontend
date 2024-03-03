@@ -26,6 +26,7 @@
         height: 400px;
         width: 60%;
     }
+
 }
 
 /* Larger screens */
@@ -47,7 +48,7 @@
     }
 }
 
-
+/* Big boys */
 @media (min-width: 1367px)   {
     .card, .calandar {
         height: 500px;

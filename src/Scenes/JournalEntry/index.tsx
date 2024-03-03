@@ -118,7 +118,7 @@ function JournalEntryPage() {
                     layout="vertical"
                     labelCol={{ span: 16 }}
                     wrapperCol={{ span: 24 }}
-                    style={{ maxWidth: 600, padding: 15 }}
+                    style={{ maxWidth: 800, padding: 15 }}
                     onFinish={onFinish}
                     onFinishFailed={onFinishFailed}
                     autoComplete="off"
