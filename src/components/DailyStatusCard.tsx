@@ -16,7 +16,7 @@ function DailyStatusCard({isLoggedIn,isEntrySubmittedToday}:DailyStatusCardProps
         navigate('/login')
     }
     return ( 
-        <Card type='inner' style={{ height: 400,padding: 50,marginTop: 15}}>
+        <Card className='card' type='inner' style={{padding: 50,marginTop: 15}}>
             {isLoggedIn && isEntrySubmittedToday && (
                 <Result
                 style={{padding: '0px !important'}}

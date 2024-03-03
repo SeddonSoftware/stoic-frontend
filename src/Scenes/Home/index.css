@@ -1,7 +1,15 @@
 .card{
-    height: 400px;
-    margin-top: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 500px;
+    width: 700px;
+    margin: 15px;
+    max-width: 800px;
+}
+
+.calandar{
+    height: 500px;
+    width: 700px;
+    margin: 15px;
 }
