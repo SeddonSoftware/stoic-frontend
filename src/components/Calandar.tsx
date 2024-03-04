@@ -59,7 +59,7 @@ import { useNavigate } from 'react-router-dom';
           });
       
           return hasEntry ? 
-            <Tooltip placement="bottom" title={"Entry"}>
+            <Tooltip placement="bottom">
               <Badge status={'success'} />
             </Tooltip> : 
             null;
