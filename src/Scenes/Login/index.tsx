@@ -32,6 +32,7 @@ function LoginPage() {
             message="Development API Server"
             description="The api server goes idle after a period of inactivity. If login fails, you may need to wait a minute for the server to start up."
             type="warning"
+            style={{marginBottom: 15}}
             />
             <Form
                 name="basic"
