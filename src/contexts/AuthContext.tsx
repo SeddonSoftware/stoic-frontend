@@ -26,17 +26,17 @@ export function useAuth(){
 
 export function AuthProvider(props: any){
     const isTokenExpired = () => {
-      const expiresAt = localStorage.getItem('expiresAt');
+      const expiresAt = sessionStorage.getItem('expiresAt');
       return new Date().getTime() > Number(expiresAt);
     };
     
     const [token, setToken] = useState<string | null>(() => {
-      const storedToken = localStorage.getItem('token');
+      const storedToken = sessionStorage.getItem('token');
       if (storedToken && !isTokenExpired()) {
         return storedToken;
       }
-      localStorage.removeItem('token');
-      localStorage.removeItem('expiresAt');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('expiresAt');
       return null;
     });
     
@@ -44,11 +44,11 @@ export function AuthProvider(props: any){
 
     useEffect(() => {
       if (token) {
-        localStorage.setItem('token', token);
+        sessionStorage.setItem('token', token);
         setIsLoggedIn(true);
       } else {
-        localStorage.removeItem('token');
-        localStorage.removeItem('expiresAt');
+        sessionStorage.removeItem('token');
+        sessionStorage.removeItem('expiresAt');
         setIsLoggedIn(false);
       }
     }, [token]);
@@ -57,8 +57,8 @@ export function AuthProvider(props: any){
       try {
         const result = await authService.login(authInput);
         const expiresAt = new Date().getTime() + result.expiresIn * 1000; // Assuming expiresIn is in seconds
-        localStorage.setItem('token', result.accessToken);
-        localStorage.setItem('expiresAt', expiresAt.toString());
+        sessionStorage.setItem('token', result.accessToken);
+        sessionStorage.setItem('expiresAt', expiresAt.toString());
         setToken(result.accessToken);
         setIsLoggedIn(true);
         return true;
