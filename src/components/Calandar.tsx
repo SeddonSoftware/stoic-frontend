@@ -4,10 +4,13 @@ import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import { useState, useEffect } from 'react';
 import journalEntryService from '../services/JournalEntryService';
+import { useNavigate } from 'react-router-dom';
+
 
 
   function Calandar() {
       const { token } = theme.useToken();
+      const navigate = useNavigate();
 
       const [journalEntries, setJournalEntries] = useState<any>();
       const [month, setmonth] = useState(dayjs().month()+1)
@@ -29,6 +32,13 @@ import journalEntryService from '../services/JournalEntryService';
 
       const onSelect = (value: Dayjs) => {
         console.log(value.format('YYYY-MM-DD'));
+        const selectedDate = value.format('YYYY-MM-DD');
+        const selectedEntry = journalEntries?.find((entry: any) => dayjs(entry.entryDate).format('YYYY-MM-DD') === selectedDate);
+  
+        if (selectedEntry) {
+          // Using navigate to go to the new page, passing state as the second argument
+          navigate('/introspection', { state: { entryData: selectedEntry } });
+        }
       };
 
       const onPanelChange = (value: Dayjs, mode: CalendarProps<Dayjs>['mode']) => {
