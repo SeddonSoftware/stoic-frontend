@@ -28,6 +28,11 @@ function LoginPage() {
     
     return(
         <Card title={"Login"}>
+            <Alert
+            message="Development API Server"
+            description="The api server goes idle after a period of inactivity. If login fails, you may need to wait a minute for the server to start up."
+            type="warning"
+            />
             <Form
                 name="basic"
                 labelCol={{ span: 8 }}
