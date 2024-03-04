@@ -1,4 +1,4 @@
-import { Card, Row, Col, Spin, Flex } from 'antd';
+import { Card, Spin, Flex } from 'antd';
 import {useAuth} from '../../contexts/AuthContext'
 import { useState, useEffect } from 'react';
 import quoteService from '../../services/QuoteService';
@@ -30,7 +30,7 @@ function HomePage() {
         const fetchTodaysJournalEntry = async () => {
             if(isLoggedIn){
                 try {
-                    let result = await journalEntryService.getTodays();
+                    await journalEntryService.getTodays();
                     setIsEntrySubmittedToday(true)
                 } catch (err) {
                     console.error('Failed to fetch today\'s journal entry:', err);
@@ -42,109 +42,7 @@ function HomePage() {
         fetchTodaysJournalEntry();
         fetchQuote();
         setIsLoading(false);
-    }, []);
-
-    let data = [
-        {
-          "id": 3,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "test",
-          "answer3": "test",
-          "answer4": "test",
-          "notes": "test",
-          "entryDate": "2024-02-14T19:34:58.8436999",
-          "user": null
-        },
-        {
-          "id": 4,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "test",
-          "answer3": "test",
-          "answer4": "test",
-          "notes": "test",
-          "entryDate": "2024-02-14T19:35:35.6011948",
-          "user": null
-        },
-        {
-          "id": 5,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "test",
-          "answer3": "test",
-          "answer4": "test",
-          "notes": "test",
-          "entryDate": "2024-02-14T19:36:33.8674179",
-          "user": null
-        },
-        {
-          "id": 6,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "testa",
-          "answer3": "dafssa",
-          "answer4": "dfas",
-          "notes": "fsd",
-          "entryDate": "2024-02-14T19:37:18.056914",
-          "user": null
-        },
-        {
-          "id": 7,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "testa",
-          "answer3": "dafssa",
-          "answer4": "dfas",
-          "notes": "fsd",
-          "entryDate": "2024-02-14T19:38:12.278457",
-          "user": null
-        },
-        {
-          "id": 8,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "testa",
-          "answer3": "dafssa",
-          "answer4": "dfas",
-          "notes": "fsd",
-          "entryDate": "2024-02-14T19:38:18.380344",
-          "user": null
-        },
-        {
-          "id": 9,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "testa",
-          "answer3": "dafssa",
-          "answer4": "dfas",
-          "notes": "fsd",
-          "entryDate": "2024-02-14T19:38:41.0649471",
-          "user": null
-        },
-        {
-          "id": 10,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "string",
-          "answer2": "string",
-          "answer3": "string",
-          "answer4": "string",
-          "notes": "string",
-          "entryDate": "2024-02-14T19:38:58.7478367",
-          "user": null
-        },
-        {
-          "id": 11,
-          "userId": "978aa19f-30e8-4081-9b46-5a591c34c30f",
-          "answer1": "test",
-          "answer2": "testa",
-          "answer3": "dafssa",
-          "answer4": "dfas",
-          "notes": "fsd",
-          "entryDate": "2024-02-14T19:40:25.1432298",
-          "user": null
-        }
-      ]
+    }, [isLoggedIn]);
 
     return ( 
     <Flex justify='center' align='center' gap='middle' wrap='wrap'> 

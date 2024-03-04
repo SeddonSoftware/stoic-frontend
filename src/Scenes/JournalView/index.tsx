@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { Card, Form, Input} from 'antd';
 import JournalEntryModel from '../../models/JournalEntry/journalEntryModel';
 import { useLocation } from 'react-router-dom';

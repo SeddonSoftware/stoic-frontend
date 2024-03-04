@@ -27,7 +27,7 @@ function JournalEntryPage() {
     
             fetchTodaysJournalEntry();
         }
-    }, [form]);
+    }, [form,journalEntry]);
 
     const showDeleteModal = () => {
         setIsModalOpen(true);
