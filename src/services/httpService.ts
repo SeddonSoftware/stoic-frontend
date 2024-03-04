@@ -14,7 +14,7 @@ const http = axios.create({
   });
 
   http.interceptors.request.use(function (config) {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     // Initialize headers object if it doesn't exist
     config.headers = config.headers || {};
     if (token) {
