@@ -15,6 +15,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { useAuth } from './contexts/AuthContext';
 import LoginPage from './Scenes/Login';
 import UserBadge from './components/UserBadge';
+import JournalViewPage from './Scenes/JournalView';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -69,6 +70,7 @@ const App: React.FC = () => {
                 <JournalEntryPage />
               </ProtectedRoute>
             } />
+            <Route path="/introspection" element={<JournalViewPage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/login" element={<LoginPage/>} />
           </Routes>
