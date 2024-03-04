@@ -148,6 +148,8 @@ function HomePage() {
 
     return ( 
     <Flex justify='center' align='center' gap='middle' wrap='wrap'> 
+      <Card style={{width:'80%', height: '90% !important'}}>
+        <Flex justify='center' align='center' gap='middle' wrap='wrap'> 
             <DailyStatusCard isLoggedIn={isLoggedIn} isEntrySubmittedToday={isEntrySubmittedToday} />
             <Card className='card'>
             {isLoading 
@@ -164,7 +166,11 @@ function HomePage() {
             </>
             }
             </Card> 
-            <Calandar/>
+            {isLoggedIn  && (
+              <Calandar/>
+            )}
+          </Flex>
+      </Card> 
     </Flex>
 
     );

@@ -41,8 +41,6 @@ import journalEntryService from '../services/JournalEntryService';
         };
 
         const dateCellRender = (value: Dayjs) => {
-          console.log("DATE CELL RENDER")
-
           const formattedDate = value.format('YYYY-MM-DD');
 
           const hasEntry = journalEntries?.some((entry:any) => {
@@ -66,10 +64,8 @@ import journalEntryService from '../services/JournalEntryService';
         const wrapperStyle: React.CSSProperties = {
           border: `1px solid ${token.colorBorderSecondary}`,
           borderRadius: token.borderRadiusLG,
+          background: token.Calendar?.fullBg
         };
-
-      
-
 
       return (
           <Calendar style={wrapperStyle} onSelect={onSelect} className='calandar' fullscreen={false} cellRender={cellRender} onPanelChange={onPanelChange} />
